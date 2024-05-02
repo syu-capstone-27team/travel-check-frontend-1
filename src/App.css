@@ -2,6 +2,31 @@
   text-align: center;
 }
 
+body {
+  font-family: nanumsquare;
+}
+
+.yellow-navigator {
+  background-color: #CCCC66;
+  color: #FFFFFF;
+  padding: 10px;
+}
+
+.page-header {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.logo {
+  max-width: 200px;
+  max-height: 100px;
+}
+
+.page-body {
+  padding: 20px;
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
