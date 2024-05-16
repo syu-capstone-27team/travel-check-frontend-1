@@ -1,7 +1,8 @@
-import logo from './assets/travel-check.png';
 import ToggleSidebar from './components/ToggleSidebar';
 import React, { createContext, useContext, useState } from 'react';
 import './App.css';
+import Header from './components/Header';
+import TravelChecklist from './components/CheckList';
 
 
 const GlobalContext = createContext({
@@ -18,20 +19,17 @@ export const useGlobalContext = (children) => {
   );
 };
 
-const logoStyle = {
-  maxWidth: '200px',
-  maxHeight: '100px',
-};
-
 const App = () => {
   return (
     <div className="App">
-      <header className={"page-header"}>
-        <img src={logo} style={logoStyle} alt="logo" />
-      </header>
-      <ToggleSidebar />
-      {/* <div style={pageBodyStyle}>
-      </div> */}
+      <Header />
+      <div style={{
+        display: 'flex',
+        height: '100vh',
+      }}>
+        <ToggleSidebar style={{flex: 0}} />
+        <TravelChecklist style={{flex: 1}} />
+      </div>
     </div>
   );
 }

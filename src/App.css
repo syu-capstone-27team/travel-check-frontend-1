@@ -36,6 +36,27 @@ body {
   pointer-events: none;
 }
 
+.logo-style {
+  max-width: 200px;
+  max-height: '10px';
+}
+
+.hover-box {
+  display: flex;
+  padding: 0 5px 0 5px;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent; /* 기본적으로 투명한 보더 */
+  border-radius: 1ch;
+  transition: background-color 0.3s ease; /* 보더 변경 시 애니메이션 */
+}
+
+/* 요소가 호버될 때 보더 스타일 변경 */
+.hover-box:hover {
+  background-color: #F8EBAA;
+  padding: 0 5px 0 5px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -64,4 +85,32 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Checkbox 스타일 */
+/* input 요소를 숨깁니다 */
+.custom-checkbox input {
+  display: none;
+}
+
+/* 사용자 지정 체크박스 스타일 */
+
+/* 기본적으로 체크 상태가 아닐 때 보여줄 SVG는 숨깁니다 */
+.checkbox-icon .unchecked {
+  display: block;
+}
+
+/* 체크 상태가 아닐 때 체크된 SVG는 숨깁니다 */
+.checkbox-icon .checked {
+  display: none;
+}
+
+/* 체크 상태일 때, 체크된 SVG를 보여줍니다 */
+input:checked + .checkbox-icon .checked {
+  display: block;
+}
+
+/* 체크 상태일 때, 체크되지 않은 SVG를 숨깁니다 */
+input:checked + .checkbox-icon .unchecked {
+  display: none;
 }
