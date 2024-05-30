@@ -4,6 +4,7 @@
 
 body {
   font-family: nanumsquare;
+  background-color: #c9c9c9;
 }
 
 .yellow-navigator {
@@ -113,4 +114,37 @@ input:checked + .checkbox-icon .checked {
 /* 체크 상태일 때, 체크되지 않은 SVG를 숨깁니다 */
 input:checked + .checkbox-icon .unchecked {
   display: none;
+}
+
+
+.textarea-auto-resize {
+  width: 100%;  /* Take full width of the container */
+  resize: none;  /* Disable manual resizing by the user */
+  overflow: hidden;  /* Hide the overflow to allow smooth height expansion */
+  border: 1px solid #ccc;  /* Optional: border to look like input */
+  font-size: 16px;  /* Font size */
+}
+
+/* columns container */
+.columns {
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+/* Default column style for larger screens */
+.column {
+  flex: 1 1 33%; /* Adjust for 3 columns */
+  padding: 10px; /* Adjust as needed */
+  box-sizing: border-box;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 900px) {
+  .columns {
+    flex-wrap: wrap;
+  }
+  .column {
+    flex-basis: 100%;
+  }
 }

@@ -1,5 +1,5 @@
 import ToggleSidebar from './components/ToggleSidebar';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import TravelChecklist from './components/CheckList';
@@ -20,6 +20,12 @@ export const useGlobalContext = (children) => {
 };
 
 const App = () => {
+  const [selectedList, setSelectedList] = useState({ id: Date.now(), name: 'New List', items: [] });
+
+  const handleListSelection = (list) => {
+    setSelectedList(list)
+  };
+
   return (
     <div className="App">
       <Header />
@@ -27,8 +33,15 @@ const App = () => {
         display: 'flex',
         height: '100vh',
       }}>
-        <ToggleSidebar style={{flex: 0}} />
-        <TravelChecklist style={{flex: 1}} />
+        <ToggleSidebar 
+          style={{flex: 0}}
+          onListSelect={handleListSelection}
+          selectedList={selectedList}
+        />
+        <TravelChecklist 
+          style={{flex: 1}}
+          selectedList={selectedList} 
+        />
       </div>
     </div>
   );

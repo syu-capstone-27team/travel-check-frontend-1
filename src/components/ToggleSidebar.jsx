@@ -1,37 +1,36 @@
 import React, { useState } from 'react';
-import { Menu, MenuItem, Sidebar, SubMenu } from 'react-pro-sidebar';
+import { Menu, MenuItem, Sidebar } from 'react-pro-sidebar';
+import folderPlusIcon from '../assets/folderPlus-icon.svg';
 import '../App.css';
 
-const ToggleSidebar = () => {
-    const [collapsed, setCollapsed] = useState(false);
+const ToggleSidebar = ({ onListSelect, selectedList }) => {
+    // State variable to store the list menu
+    const [listMenu, setListMenu] = useState([selectedList]);
 
-    const handleToggle = () => {
-        setCollapsed(!collapsed);
+    // selection of list
+    const handleListClick = (list) => {
+        onListSelect(list);
+    }
+
+    // Function to handle adding a new list
+    const addList = () => {
+        setListMenu([...listMenu, { id: Date.now(), name: 'New List1', items: [] }]);
     };
 
+    
     return (
         <>
         <Sidebar className={"Sidebar"}>
             <main>
-                <Menu
-                    style={{ paddingTop: '20px' }}
-                    menuItemStyles={{
-                        button: {
-                            // the active class will be added automatically by react router
-                            // so we can use it to style the active menu item
-                            [`&.active`]: {
-                                backgroundColor: '#13395e',
-                                color: '#b6c8d9',
-                            },
-                        },
-                    }}
-                >
-                    <SubMenu title="나의 체크리스트"> 나의 체크리스트
-                        <MenuItem>체크리스트1</MenuItem>
-                        <MenuItem>체크리스트2</MenuItem>
-                        <MenuItem>체크리스트3</MenuItem>
-                    </SubMenu>
-                    <MenuItem>체크리스트 등록</MenuItem>
+                <Menu style={{ paddingTop: '20px' }}> 나의 체크리스트
+                    <div className='hover-box' onClick={addList} style={{ display: 'flex', alignItems: 'end'}}>
+                        <img src={folderPlusIcon} alt='추가' style={{ marginRight: "5px" }} /> 리스트 추가
+                    </div>
+                    {listMenu.map(list => (
+                        <MenuItem key={list.id} onClick={() => handleListClick(list)}>
+                            {list.name}
+                        </MenuItem>
+                    ))}
                 </Menu>
             </main>
         </Sidebar>
