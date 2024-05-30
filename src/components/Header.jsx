@@ -1,19 +1,11 @@
 import React from 'react';
-import logo from '../assets/travel-check-icon.png';
 
 const Header = () => {
     const isLoggedIn = false; // Replace with your login state logic
     const userId = 'exampleUser'; // Replace with your user ID logic
 
     return (
-        <header style={{
-            backgroundColor: "#262D3F",
-            display: "flex",
-            // justifyContent: "space-between"
-            justifyContent: "center",
-            position: "relative",
-            padding: "10px 20px",
-        }}>
+        <header>
             <div style={{
                 flex: 1,
                 display: "flex",
@@ -21,7 +13,7 @@ const Header = () => {
                 alignItems: "center",
                 // padding: "10px 20px"
             }}>
-                <img className={"logo-style"} src={logo} alt="Logo" />
+                <h1>Travel Check</h1>
             </div>
             <div style={{
                 // flex: 0,
