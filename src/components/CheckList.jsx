@@ -136,21 +136,23 @@ const TravelChecklist = ({ selectedList, duplicateList, duplicateTarget }) => {
     }, [checkList]);
 
     return (
-        <div className='travelChecklistSection' style={{ padding: '20px', width: '100%' }}>
-            <div className='hover-box' 
-                onClick={addCategory} 
-                style={{ 
-                    width: '15%', 
-                    cursor: 'pointer', 
-                    display: 'flex', 
-                    justifyContent: 'center', 
-                    marginTop: 'auto',
-                    marginBottom: '25px',
-                    fontSize: '90%',
-                    border: 'solid red'
-                }}>
-                <img src={folderPlusIcon} alt='추가' style={{ width: '20px', height: '20px', marginRight: '7px' }} /> 
-                카테고리 추가
+        <div style={{ width: '100%' }}>
+            <div style={{ justifyContent: 'center', display: 'flex', position: 'relative'}}>
+                <div className='hover-box' 
+                    onClick={addCategory} 
+                    style={{ 
+                        width: '15%', 
+                        cursor: 'pointer', 
+                        display: 'flex', 
+                        justifyContent: 'center', 
+                        marginTop: '1%',
+                        marginBottom: '25px',
+                        fontSize: '90%',
+                        border: 'solid red'
+                    }}>
+                    <img src={folderPlusIcon} alt='추가' style={{ width: '20px', height: '20px', marginRight: '7px' }} /> 
+                    카테고리 추가
+                </div>
             </div>
             <div className='columns'>
             {[0, 1, 2].map(column => (

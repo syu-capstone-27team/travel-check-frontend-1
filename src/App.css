@@ -20,6 +20,7 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--bs-body-color);
 }
 
 code {
@@ -43,7 +44,7 @@ code {
 
 .Sidebar {
   height: 100vh;
-  background-color: #f8b9b9;
+  background-color: #ffc9d6;
 }
 
 .SidebarMenu {
@@ -163,7 +164,6 @@ input:checked + .checkbox-icon .unchecked {
 .columns {
   display: flex;
   width: 100%;
-  flex-wrap: nowrap;
 }
 
 /* Default column style for larger screens */
@@ -265,6 +265,7 @@ input:checked + .checkbox-icon .unchecked {
   background: none;
   border: none;
   cursor: pointer;
+  color: rgb(255, 0, 61);
 }
 
 .category-dots {

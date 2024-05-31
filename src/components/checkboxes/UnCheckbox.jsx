@@ -5,10 +5,10 @@ import styles from '../index.module.scss';
 
 const UnCheckbox = () => {
     return (
-        <div className={styles.checkIcon}>
+        <div className={styles.checkIcon} style={{ opacity:'100%' }}>
             <label className="custom-checkbox">
                 <input type="checkbox" />
-                    <img src={uncheckedBoxIcon} alt="unchecked" />
+                    <img style={{ cursor: 'pointer' }} src={uncheckedBoxIcon} alt="unchecked" />
             </label>
         </div>
     );

@@ -7,10 +7,10 @@ import styles from '../index.module.scss';
 
 const Checkbox = () => {
     return (
-        <div className={styles.checkIcon}>
+        <div className={styles.checkIcon} style={{ opacity:'100%' }}>
             <label className="custom-checkbox">
                 <input type="checkbox" />
-                    <img src={checkedBoxIcon} alt="checked" />
+                    <img style={{ cursor: 'pointer' }} src={checkedBoxIcon} alt="checked" />
             </label>
         </div>
     );

@@ -75,12 +75,43 @@
     object-fit: cover;
 }
 
+.mainContent {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    gap: 0px 1px;
+    margin: 0px 0px 1px;
+    @include lg {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px 1px;
+    }
+}
+
+.columnsContentBox {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 497px;
+    min-width: 0px;
+    @include lg {
+        margin-top: unset;
+        margin-bottom: unset;
+        width: 100%;
+        min-width: unset;
+    }
+}
+
 .categoryColumn {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 28px 35px 196px;
+    width: 100%;
+    min-width: 0px;
+    margin: 28px -3px 196px;
+    border-left: 1px solid rgba(86, 73, 228, 0.098);
+    border-right: 1px solid rgba(86, 73, 228, 0.098);
     @include md {
       margin: 28px 32px 150px;
     }
@@ -106,7 +137,13 @@
     height: 17px;
     object-fit: cover;
     transform: translateY(20%);
+    // color: rgb(255, 0, 61);
     cursor: pointer;
+    opacity: 25%;
+}
+
+.checkIcon:hover {
+    opacity: 100%;
 }
 
 .checkItem {
@@ -116,6 +153,59 @@
     border: 1px solid #ccc; 
     font-size: 16px;
     position: relative;
+    font: 400 18px/1.2 "Product Sans", Helvetica, Arial, serif;
+    color: rgb(91, 91, 114);
+    @include md {
+        align-items: flex-start;
+        font-size: 16px;
+    }
+}
+
+.Sidebar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 429px;
+    min-width: 0px;
+    background-color: rgba(255, 201, 214, 0.098);
+    box-shadow: 0px 6px 10px 0px rgba(52, 52, 52, 0.098);
+    @include lg {
+        margin-top: unset;
+        margin-bottom: unset;
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+.listSubtitle {
+    position: relative;
+    width: 282px;
+    min-width: 0px;
+    font: 700 20px/1.2 "Product Sans", Helvetica, Arial, serif;
+    color: rgb(255, 0, 61);
+    @include md {
+        align-items: flex-start;
+        font-size: 18px;
+    }
+    @include xxs {
+        font-size: 16px;
+    }
+}
+
+.menu {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 0px 10px;
+    margin: 10px 0px 0px;
+    width: 100%;
+
+}
+
+.menuItem {
+    position: relative;
+    margin: 2px 0px 0px;
+    min-width: 0px;
     font: 400 18px/1.2 "Product Sans", Helvetica, Arial, serif;
     color: rgb(91, 91, 114);
     @include md {

@@ -5,6 +5,7 @@ import '../App.css';
 import { CgMore } from "react-icons/cg";
 import { FaCheckCircle  } from "react-icons/fa";
 import { FaBan  } from "react-icons/fa";
+import styles from './index.module.scss';
 
 
 
@@ -86,87 +87,88 @@ const ToggleSidebar = ({ onListSelect, onDuplicateList, onDuplicateTarget, selec
     }, [dropdownVisible]);
 
     return (
-        <>
-            <Sidebar className={"Sidebar"}>
-                <main>
-                    <Menu style={{ paddingTop: '20px' }}> 
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ marginLeft: '10px', fontSize: '18px'}}>나의 체크리스트</div>
-                            <div className='hover-box' onClick={addList} >
-                                <img src={listPlusIcon} alt='추가' style={{ cursor: 'pointer' }}/>
-                            </div>
-                        </div>
-                        
-                        {listMenu.map(list => (
-                            <div key={list.id} style={{ position: 'relative' }}>
-                                {renamingListId === list.id ? (
-                                    <div className='SidebarMenu'>
-                                        <input
-                                            type="text"
-                                            value={newListName}
-                                            onChange={handleRenameInputChange}
-                                            style={{ flex: '1', marginLeft: '10px' }}
-                                        />
-                                        <FaCheckCircle  
-                                            size={24}
-                                            style={{ 
-                                                position: 'relative', 
-                                                objectFit: 'cover',
-                                                cursor: 'pointer'
-                                            }}
-                                            onClick={() => saveListName(list.id)}
-                                        />
-                                        <FaBan 
-                                            size={24}
-                                            style={{ 
-                                                position: 'relative', 
-                                                objectFit: 'cover',
-                                                marginRight: '10px',
-                                                cursor: 'pointer'
-                                            }}
-                                            onClick={cancelRenaming} 
-                                        />
-                                    </div>
-                                ) : (
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
-                                        <MenuItem
-                                            onClick={() => handleListClick(list)} 
-                                            style={{ 
-                                                whiteSpace: 'nowrap',
-                                                overflow: 'hidden', 
-                                                textOverflow: 'ellipsis',
-                                                background: selectedList.id === list.id ? 'lightgrey' : 'none' // Change background color for active list
-                                            }}>
-                                            {list.name}
-                                        </MenuItem>
-                                        <CgMore 
-                                            className='dots'
-                                            onClick={(e) => {
-                                                e.stopPropagation(); // Prevent triggering the MenuItem click
-                                                toggleDropdown(list.id);
-                                            }}
-                                            ref={(el) => (dropdownRefs.current[list.id] = el)}
-                                        />
-                                    </div>
-                                )}
-                                {dropdownVisible === list.id && (
-                                    <div 
-                                        className="dropdown-menu" 
-                                        ref={(el) => (dropdownRefs.current[list.id] = el)}
-                                        style={{ position: 'absolute', top: '50%', right: 0, transform: 'translateY(10%)' }}
-                                    >
-                                        <div className='dropdown-item' onClick={() => duplicateList(list)}>Duplicate</div>
-                                        <div className="dropdown-item" onClick={() => startRenaming(list.id, list.name)}>Rename</div>
-                                        <div className="dropdown-item" onClick={() => deleteList(list.id)}>Delete</div>
-                                    </div>
-                                )}
-                            </div>
 
-                        ))}
-                    </Menu>
-                </main>
-            </Sidebar>
-        </>
+        <Sidebar className={styles.Sidebar} style={{ width: '429px', minWidth: '0px' }}>
+            <Menu style={{ paddingTop: '20px' }}> 
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <h3 className={styles.listSubtitle}>나의 체크리스트</h3>
+                    <div className='hover-box' onClick={addList} >
+                        <img src={listPlusIcon} alt='추가' style={{ cursor: 'pointer' }}/>
+                    </div>
+                </div>
+                
+                {listMenu.map(list => (
+                    <div key={list.id} style={{ position: 'relative' }}>
+                        {renamingListId === list.id ? (
+                            <div className='SidebarMenu'>
+                                <input
+                                    type="text"
+                                    value={newListName}
+                                    onChange={handleRenameInputChange}
+                                    style={{ flex: '1', marginLeft: '10px' }}
+                                />
+                                <FaCheckCircle  
+                                    size={24}
+                                    style={{ 
+                                        position: 'relative', 
+                                        objectFit: 'cover',
+                                        cursor: 'pointer'
+                                    }}
+                                    onClick={() => saveListName(list.id)}
+                                />
+                                <FaBan 
+                                    size={24}
+                                    style={{ 
+                                        position: 'relative', 
+                                        objectFit: 'cover',
+                                        marginRight: '10px',
+                                        cursor: 'pointer'
+                                    }}
+                                    onClick={cancelRenaming} 
+                                />
+                            </div>
+                        ) : (
+                            <div className={styles.menu}>
+                                <MenuItem
+                                    className={styles.menuItem}
+                                    onClick={() => handleListClick(list)} 
+                                    style={{ 
+                                        textAlign: 'left',
+                                        whiteSpace: 'nowrap',
+                                        overflow: 'hidden', 
+                                        textOverflow: 'ellipsis',
+                                        background: selectedList.id === list.id ? 'rgba(255, 201, 214, 0.298)' : 'none' // Change background color for active list
+                                    }}>
+                                    {list.name}
+                                </MenuItem>
+                                <CgMore 
+                                    className='dots'
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Prevent triggering the MenuItem click
+                                        toggleDropdown(list.id);
+                                    }}
+                                    ref={(el) => (dropdownRefs.current[list.id] = el)}
+                                />
+                            </div>
+                        )}
+                        {dropdownVisible === list.id && (
+                            <div 
+                                className="dropdown-menu" 
+                                ref={(el) => (dropdownRefs.current[list.id] = el)}
+                                style={{ position: 'absolute', top: '50%', right: 0, transform: 'translateY(10%)' }}
+                            >
+                                <div className='dropdown-item' onClick={() => duplicateList(list)}>Duplicate</div>
+                                <div className="dropdown-item" onClick={() => startRenaming(list.id, list.name)}>Rename</div>
+                                <div className="dropdown-item" onClick={() => deleteList(list.id)}>Delete</div>
+                            </div>
+                        )}
+                    </div>
+
+                ))}
+            </Menu>
+
+        </Sidebar>
+
     );
 };
 

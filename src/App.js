@@ -5,6 +5,7 @@ import Header from './components/Header';
 import TravelChecklist from './components/CheckList';
 
 import './fonts.css';
+import styles from './components/index.module.scss';
 
 
 const GlobalContext = createContext({
@@ -42,12 +43,8 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <div style={{
-        display: 'flex',
-        height: '100vh',
-      }}>
+      <div className={styles.mainContent}>
         <ToggleSidebar 
-          style={{flex: 0}}
           onListSelect={handleListSelection}
           onDuplicateList={handleDuplicateList}
           onDuplicateTarget={handleDuplicateTarget}

@@ -10,7 +10,7 @@ const Header = () => {
     return (
         <header>
             <div className={styles.contentBox7}>
-                <div className={styles.flexRow}>
+                <div className={styles.flexRow} style={{ maxWidth: '100%' }}>
                     <div className={styles.group}>
                         <h1 className={styles.bigTitle}>Travel Checklist</h1>
                         <h5 className={styles.versionHighlight}>v.01</h5>

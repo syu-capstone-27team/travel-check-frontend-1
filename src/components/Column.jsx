@@ -115,7 +115,7 @@ const Column = ({ column, categoryList, checkList, selectedList, setListState, a
                             <div className='hover-box' onClick={() => addChecklistItem(category.id)} style={{ width: '15%', margin: '0 auto' }}>
                                 <img className='plusImage' src={plusIcon} alt='추가' />
                             </div>
-                            <hr style={{ borderTop: "1px solid #000000", opacity: '30%', marginTop: '30px' }} />
+                            <hr style={{ marginTop: '30px' }} />
                         </>
                     )}
                 </div>
