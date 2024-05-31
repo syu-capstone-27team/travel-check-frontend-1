@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, MenuItem, Sidebar } from 'react-pro-sidebar';
-import folderPlusIcon from '../assets/folderPlus-icon.svg';
+import listPlusIcon from '../assets/list-plus-icon.svg';
 import '../App.css';
 import { CgMore } from "react-icons/cg";
+import { FaCheckCircle  } from "react-icons/fa";
+import { FaBan  } from "react-icons/fa";
 
-const ToggleSidebar = ({ onListSelect, selectedList }) => {
+
+
+const ToggleSidebar = ({ onListSelect, onDuplicateList, onDuplicateTarget, selectedList }) => {
     // State variable to store the list menu
     const [listMenu, setListMenu] = useState([selectedList]);
     // dropdown visibility
@@ -25,6 +29,17 @@ const ToggleSidebar = ({ onListSelect, selectedList }) => {
     const addList = () => {
         setListMenu([...listMenu, { id: Date.now(), name: 'New List', items: [] }]);
     };
+
+    const deleteList = (listId) => {
+        setListMenu(listMenu.filter(item => item.id !== listId));
+    }
+
+    const duplicateList = (list) => {
+        const newList = { ...list, id: Date.now() };
+        setListMenu([...listMenu, newList]);
+        onDuplicateList(list);
+        onDuplicateTarget(newList);
+    }
 
     // Function to toggle the dropdown
     const toggleDropdown = (listId) => {
@@ -76,39 +91,56 @@ const ToggleSidebar = ({ onListSelect, selectedList }) => {
                 <main>
                     <Menu style={{ paddingTop: '20px' }}> 
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div>나의 체크리스트</div>
+                            <div style={{ marginLeft: '10px', fontSize: '18px'}}>나의 체크리스트</div>
                             <div className='hover-box' onClick={addList} >
-                                <img src={folderPlusIcon} alt='추가' />
+                                <img src={listPlusIcon} alt='추가' style={{ cursor: 'pointer' }}/>
                             </div>
                         </div>
                         
                         {listMenu.map(list => (
                             <div key={list.id} style={{ position: 'relative' }}>
                                 {renamingListId === list.id ? (
-                                    <div style={{ display: 'flex', alignItems: 'center', width: '50%' }}>
+                                    <div className='SidebarMenu'>
                                         <input
                                             type="text"
                                             value={newListName}
                                             onChange={handleRenameInputChange}
-                                            style={{ flex: 1, marginRight: '10px' }}
+                                            style={{ flex: '1', marginLeft: '10px' }}
                                         />
-                                        <button onClick={() => saveListName(list.id)}>Save</button>
-                                        <button onClick={cancelRenaming}>Cancel</button>
+                                        <FaCheckCircle  
+                                            size={24}
+                                            style={{ 
+                                                position: 'relative', 
+                                                objectFit: 'cover',
+                                                cursor: 'pointer'
+                                            }}
+                                            onClick={() => saveListName(list.id)}
+                                        />
+                                        <FaBan 
+                                            size={24}
+                                            style={{ 
+                                                position: 'relative', 
+                                                objectFit: 'cover',
+                                                marginRight: '10px',
+                                                cursor: 'pointer'
+                                            }}
+                                            onClick={cancelRenaming} 
+                                        />
                                     </div>
                                 ) : (
-                                    <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-                                        <MenuItem 
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+                                        <MenuItem
                                             onClick={() => handleListClick(list)} 
                                             style={{ 
                                                 whiteSpace: 'nowrap',
                                                 overflow: 'hidden', 
-                                                textOverflow: 'ellipsis'
+                                                textOverflow: 'ellipsis',
+                                                background: selectedList.id === list.id ? 'lightgrey' : 'none' // Change background color for active list
                                             }}>
                                             {list.name}
                                         </MenuItem>
                                         <CgMore 
                                             className='dots'
-                                            style={{ fontSize: '20px', padding: '15px', }} 
                                             onClick={(e) => {
                                                 e.stopPropagation(); // Prevent triggering the MenuItem click
                                                 toggleDropdown(list.id);
@@ -118,9 +150,14 @@ const ToggleSidebar = ({ onListSelect, selectedList }) => {
                                     </div>
                                 )}
                                 {dropdownVisible === list.id && (
-                                    <div className="dropdown-menu" ref={(el) => (dropdownRefs.current[list.id] = el)}>
+                                    <div 
+                                        className="dropdown-menu" 
+                                        ref={(el) => (dropdownRefs.current[list.id] = el)}
+                                        style={{ position: 'absolute', top: '50%', right: 0, transform: 'translateY(10%)' }}
+                                    >
+                                        <div className='dropdown-item' onClick={() => duplicateList(list)}>Duplicate</div>
                                         <div className="dropdown-item" onClick={() => startRenaming(list.id, list.name)}>Rename</div>
-                                        <div className="dropdown-item" onClick={() => { console.log("Delete clicked"); setDropdownVisible(null); }}>Delete</div>
+                                        <div className="dropdown-item" onClick={() => deleteList(list.id)}>Delete</div>
                                     </div>
                                 )}
                             </div>

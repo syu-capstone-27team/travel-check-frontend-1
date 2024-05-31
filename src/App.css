@@ -1,25 +1,34 @@
+
+h1, h2, h3, h4, h5, h6, hr, p, figure {
+    display: block;
+    font-weight: normal;
+    margin: 0;
+    border-width: 0;
+    opacity: 1;
+}
+
+
 .App {
   text-align: center;
 }
 
+
 body {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  background-color: #ebebeb;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-header {
-  background-color: #db0000;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  padding: 10px 20px;
-
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  monospace;
 }
 
-h1 {
-  color: #FFFFFF;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
+
+
 
 .yellow-navigator {
   background-color: #d8d839;
@@ -35,6 +44,15 @@ h1 {
 .Sidebar {
   height: 100vh;
   background-color: #f8b9b9;
+}
+
+.SidebarMenu {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 0px 10px;
+  margin: 36px 0px 0px;
+  width: 100%;
 }
 
 .logo {
@@ -65,11 +83,12 @@ h1 {
   border: 2px solid transparent; /* 기본적으로 투명한 보더 */
   border-radius: 1ch;
   transition: background-color 0.3s ease; /* 보더 변경 시 애니메이션 */
+  margin-top: auto;
 }
 
 /* 요소가 호버될 때 보더 스타일 변경 */
 .hover-box:hover {
-  background-color: #F8EBAA;
+  background-color: #fdf9d4;
   padding: 0 5px 0 5px;
 }
 
@@ -133,11 +152,11 @@ input:checked + .checkbox-icon .unchecked {
 
 
 .textarea-auto-resize {
-  width: 100%;  /* Take full width of the container */
-  resize: none;  /* Disable manual resizing by the user */
-  overflow: hidden;  /* Hide the overflow to allow smooth height expansion */
-  border: 1px solid #ccc;  /* Optional: border to look like input */
-  font-size: 16px;  /* Font size */
+  width: 100%; 
+  resize: none;  
+  overflow: hidden;  
+  border: 1px solid #ccc; 
+  font-size: 16px;
 }
 
 /* columns container */
@@ -154,6 +173,10 @@ input:checked + .checkbox-icon .unchecked {
   box-sizing: border-box;
 }
 
+.column:last-child {
+  margin-right: 0;
+}
+
 /* Media query for smaller screens */
 @media (max-width: 900px) {
   .columns {
@@ -165,14 +188,16 @@ input:checked + .checkbox-icon .unchecked {
 }
 
 .dropdown-menu {
+  width: 80px;
   position: absolute;
+  top: 50%;
+  transform: translateY(10%);
+  right: 0;
   background-color: white;
-  top: 55%;
-  right: 12%;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 10;
   padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 5px; 
 }
 
 .dropdown-item {
@@ -187,8 +212,86 @@ input:checked + .checkbox-icon .unchecked {
 .dots {
   cursor: pointer;
   opacity: 25%;
+  font-size: 25px;
+  position: relative;
+  right: 0;
+  margin-right: 10px;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(50%);
 }
 
 .dots:hover {
   opacity: 100%;
 }
+
+.category-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 0px 10px;
+  width: 100%;
+}
+.category-title {
+  position: relative;
+  border: none;
+  min-width: 0px;
+  font: 700 20px/1.2 "Product Sans", Helvetica, Arial, serif;
+  color: rgb(255, 0, 61);
+  margin-bottom: 15px;
+  width: 75%;
+  margin-right: 20%;
+}
+
+.category-title::placeholder {
+  color: rgb(255, 0, 61);
+  opacity: 40%;
+}
+
+.category-options {
+  position: relative;
+  display: flex;
+  gap: 0px 2px;
+  width: 75px;
+  min-width: 0px;
+}
+.toggle-button {
+  position: relative;
+  margin: 4.5px 0px 10px;
+  width: 19px;
+  min-width: 0px;
+  height: 5px;
+  object-fit: cover;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.category-dots {
+  position: relative;
+  width: 34px;
+  min-width: 0px;
+  height: 24px;
+  object-fit: cover;
+}
+
+
+.column-divider {
+  border-left: 5px solid #000000;
+  height: 100%;
+}
+
+.menu-item:active {
+  background: #bdbdbdc0;
+}
+
+.plusImage {
+  position: relative;
+  margin: 4px 0px 8px;
+  width: 14px;
+  min-width: 0px;
+  height: 12px;
+  object-fit: cover;
+  cursor: pointer;
+}
+

@@ -1,21 +1,27 @@
 import React from 'react';
+import styles from './index.module.scss';
+import coverImage from '../assets/cover-image.svg'
+import loginImage from '../assets/login-image.svg'
 
 const Header = () => {
-    const isLoggedIn = false; // Replace with your login state logic
-    const userId = 'exampleUser'; // Replace with your user ID logic
+    // const isLoggedIn = false; // Replace with your login state logic
+    // const userId = 'exampleUser'; // Replace with your user ID logic
 
     return (
         <header>
-            <div style={{
-                flex: 1,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                // padding: "10px 20px"
-            }}>
-                <h1>Travel Check</h1>
+            <div className={styles.contentBox7}>
+                <div className={styles.flexRow}>
+                    <div className={styles.group}>
+                        <h1 className={styles.bigTitle}>Travel Checklist</h1>
+                        <h5 className={styles.versionHighlight}>v.01</h5>
+                    </div>
+
+                    <img className={styles.coverImage} src={coverImage} alt='Cover' />
+                    <img className={styles.loginImage} src={loginImage} alt='Login' />
+                </div>
             </div>
-            <div style={{
+
+            {/* <div style={{
                 // flex: 0,
                 position: "absolute",
                 right: 0,
@@ -37,7 +43,7 @@ const Header = () => {
                         cursor: "pointer",
                     }}>Login</button>
                 )}
-            </div>
+            </div> */}
         </header>
     );
 };

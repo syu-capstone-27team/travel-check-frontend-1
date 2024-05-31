@@ -4,6 +4,8 @@ import './App.css';
 import Header from './components/Header';
 import TravelChecklist from './components/CheckList';
 
+import './fonts.css';
+
 
 const GlobalContext = createContext({
   user: null,
@@ -21,10 +23,21 @@ export const useGlobalContext = (children) => {
 
 const App = () => {
   const [selectedList, setSelectedList] = useState({ id: Date.now(), name: 'New List', items: [] });
+  const [duplicateList, setDuplicateList] = useState([])
+  const [duplicateTarget, setDuplicateTarget] = useState([])
 
   const handleListSelection = (list) => {
     setSelectedList(list)
   };
+
+  const handleDuplicateList = (list) => {
+    setDuplicateList(list)
+  }
+  
+  const handleDuplicateTarget = (list) => {
+    setDuplicateTarget(list)
+  }
+
 
   return (
     <div className="App">
@@ -36,11 +49,15 @@ const App = () => {
         <ToggleSidebar 
           style={{flex: 0}}
           onListSelect={handleListSelection}
+          onDuplicateList={handleDuplicateList}
+          onDuplicateTarget={handleDuplicateTarget}
           selectedList={selectedList}
         />
         <TravelChecklist 
           style={{flex: 1}}
-          selectedList={selectedList} 
+          selectedList={selectedList}
+          duplicateList={duplicateList}
+          duplicateTarget={duplicateTarget}
         />
       </div>
     </div>
