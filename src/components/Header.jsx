@@ -2,10 +2,21 @@ import React from 'react';
 import styles from './index.module.scss';
 import coverImage from '../assets/cover-image.svg'
 import loginImage from '../assets/login-image.svg'
+import { useNavigate } from 'react-router-dom';
+
 
 const Header = () => {
     // const isLoggedIn = false; // Replace with your login state logic
     // const userId = 'exampleUser'; // Replace with your user ID logic
+    const navigate = useNavigate();
+
+    // Currently logout; Could be profile? 
+    const logout = () => {
+        navigate('/');
+    }
+    const refresh = () => {
+        navigate('/Main');
+    }
 
     return (
         <header>
@@ -16,8 +27,12 @@ const Header = () => {
                         <h5 className={styles.versionHighlight}>v.01</h5>
                     </div>
 
-                    <img className={styles.coverImage} src={coverImage} alt='Cover' />
-                    <img className={styles.loginImage} src={loginImage} alt='Login' />
+                    <img className={styles.coverImage} src={coverImage} alt='Cover' 
+                        onClick={refresh}
+                    />
+                    <img className={styles.loginImage} src={loginImage} alt='Login' 
+                        onClick={logout}
+                    />
                 </div>
             </div>
 

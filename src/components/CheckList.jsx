@@ -1,11 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import Column from './Column';
-import folderPlusIcon from '../assets/folderPlus-icon.svg';
+// import folderPlusIcon from '../assets/folderPlus-icon.svg';
 
 
 const TravelChecklist = ({ selectedList, duplicateList, duplicateTarget }) => {
     // State management
     const [lists, setLists] = useState({});
+
+    // Category template
+    // name만 변경하면 됩니다
+    const categoryList = [
+        { id: 0, name: '0', column: 0 },
+        { id: 1, name: '1', column: 1 },
+        { id: 2, name: '2', column: 2 },
+        { id: 3, name: '3', column: 0 },
+        { id: 4, name: '4', column: 1 },
+        { id: 5, name: '5', column: 2 },
+        { id: 6, name: '6', column: 0 },
+        { id: 7, name: '7', column: 1 },
+        { id: 8, name: '8', column: 2 },
+    ]
 
 
     useEffect(() => {
@@ -15,7 +29,6 @@ const TravelChecklist = ({ selectedList, duplicateList, duplicateTarget }) => {
                 ...prevLists, 
                 [selectedList.id]: {
                     checkList: [],
-                    categoryList: [], 
                     columnCount: 3 // initial column count
                 }
             }));
@@ -33,7 +46,7 @@ const TravelChecklist = ({ selectedList, duplicateList, duplicateTarget }) => {
     }, [duplicateList, duplicateTarget]);
 
     // Destructure selected list state for easier access
-    const { checkList = [], categoryList = [], columnCount = 3 } = selectedList ? lists[selectedList.id] || {} : {};
+    const { checkList = [], columnCount = 3 } = selectedList ? lists[selectedList.id] || {} : {};
 
     // State update functions
     const setListState = (listId, updatedProperties) => {
@@ -46,18 +59,18 @@ const TravelChecklist = ({ selectedList, duplicateList, duplicateTarget }) => {
         }));
     };
 
-    const addCategory = () => {
-        const newCategory = { id: Date.now(), name: 'New Column', column: categoryList.length % columnCount };
-        setListState(selectedList.id, {
-            categoryList: [...categoryList, newCategory]
-        });
-    };
+    // const addCategory = () => {
+    //     const newCategory = { id: Date.now(), name: 'New Column', column: categoryList.length % columnCount };
+    //     setListState(selectedList.id, {
+    //         categoryList: [...categoryList, newCategory]
+    //     });
+    // };
 
-    const removeCategory = (categoryId) => {
-        setListState(selectedList.id, {
-            categoryList: categoryList.filter(cat => cat.id !== categoryId)
-        });
-    };
+    // const removeCategory = (categoryId) => {
+    //     setListState(selectedList.id, {
+    //         categoryList: categoryList.filter(cat => cat.id !== categoryId)
+    //     });
+    // };
 
     const addChecklistItem = (categoryId) => {
         setListState(selectedList.id, {
@@ -98,7 +111,7 @@ const TravelChecklist = ({ selectedList, duplicateList, duplicateTarget }) => {
             // Update column indexes of all categories
             const updatedCategoryList = categoryList.map((category, index) => ({
                 ...category,
-                column: newColumnCount === 1 ? 1 : index % newColumnCount
+                column: newColumnCount === 1 ? 0 : index % newColumnCount
             }));
             setListState(selectedList.id, {
                 categoryList: updatedCategoryList
@@ -137,23 +150,6 @@ const TravelChecklist = ({ selectedList, duplicateList, duplicateTarget }) => {
 
     return (
         <div style={{ width: '100%' }}>
-            <div style={{ justifyContent: 'center', display: 'flex', position: 'relative'}}>
-                <div className='hover-box' 
-                    onClick={addCategory} 
-                    style={{ 
-                        width: '15%', 
-                        cursor: 'pointer', 
-                        display: 'flex', 
-                        justifyContent: 'center', 
-                        marginTop: '1%',
-                        marginBottom: '25px',
-                        fontSize: '90%',
-                        border: 'solid red'
-                    }}>
-                    <img src={folderPlusIcon} alt='추가' style={{ width: '20px', height: '20px', marginRight: '7px' }} /> 
-                    카테고리 추가
-                </div>
-            </div>
             <div className='columns'>
             {[0, 1, 2].map(column => (
                 <>
@@ -164,9 +160,7 @@ const TravelChecklist = ({ selectedList, duplicateList, duplicateTarget }) => {
                     checkList={checkList}
                     selectedList={selectedList}
                     setListState={setListState}
-                    addCategory={addCategory}
                     addChecklistItem={addChecklistItem}
-                    removeCategory={removeCategory}
                     removeChecklistItem={removeChecklistItem}
                     toggleChecklistItemChecked={toggleChecklistItemChecked}
                     handleInputChange={handleInputChange}

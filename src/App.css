@@ -234,23 +234,18 @@ input:checked + .checkbox-icon .unchecked {
 }
 .category-title {
   position: relative;
-  border: none;
   min-width: 0px;
   font: 700 20px/1.2 "Product Sans", Helvetica, Arial, serif;
   color: rgb(255, 0, 61);
   margin-bottom: 15px;
-  width: 75%;
+  width: 100%;
   margin-right: 20%;
-}
-
-.category-title::placeholder {
-  color: rgb(255, 0, 61);
-  opacity: 40%;
 }
 
 .category-options {
   position: relative;
   display: flex;
+  justify-content: space-between;
   gap: 0px 2px;
   width: 75px;
   min-width: 0px;
@@ -296,3 +291,47 @@ input:checked + .checkbox-icon .unchecked {
   cursor: pointer;
 }
 
+.save {
+  cursor: pointer;
+}
+
+.popup-content {
+  margin: auto;
+  background: #41cc5f80;
+  width: 50%;
+  padding: 5px;
+}
+.popup-arrow {
+  color: #41cc5f80;
+}
+[role='tooltip'].popup-content {
+  width: auto;
+  box-shadow: #00ff22 0px 0px 3px;
+}
+
+.checkCircle {
+  position: relative;
+  object-fit: cover;
+  cursor: pointer;
+}
+.checkCircle:hover {
+  opacity: 70%;
+}
+
+.cancelX {
+  position: relative;
+  object-fit: cover;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.cancelX:hover {
+  opacity: 70%;
+}
+
+.kakaoLoginButton {
+  cursor: pointer;
+}
+
+.kakaoLoginButton:hover {
+  opacity: 80%;
+}

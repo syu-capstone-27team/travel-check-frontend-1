@@ -1,64 +1,24 @@
-import ToggleSidebar from './components/ToggleSidebar';
-import React, { createContext, useState } from 'react';
-import './App.css';
-import Header from './components/Header';
-import TravelChecklist from './components/CheckList';
-
-import './fonts.css';
-import styles from './components/index.module.scss';
-
-
-const GlobalContext = createContext({
-  user: null,
-  setGlobalState: () => {},
-});
-
-export const useGlobalContext = (children) => {
-  const [globalState, setGlobalState] = useState({ user: null });
-  return (
-    <GlobalContext.Provider value={{ globalState, setGlobalState }}>
-      {children}
-    </GlobalContext.Provider>
-  );
-};
+import React from 'react';
+import Login from './components/Login'
+import Main from './components/Main';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 const App = () => {
-  const [selectedList, setSelectedList] = useState({ id: Date.now(), name: 'New List', items: [] });
-  const [duplicateList, setDuplicateList] = useState([])
-  const [duplicateTarget, setDuplicateTarget] = useState([])
-
-  const handleListSelection = (list) => {
-    setSelectedList(list)
-  };
-
-  const handleDuplicateList = (list) => {
-    setDuplicateList(list)
-  }
-  
-  const handleDuplicateTarget = (list) => {
-    setDuplicateTarget(list)
-  }
-
-
-  return (
-    <div className="App">
-      <Header />
-      <div className={styles.mainContent}>
-        <ToggleSidebar 
-          onListSelect={handleListSelection}
-          onDuplicateList={handleDuplicateList}
-          onDuplicateTarget={handleDuplicateTarget}
-          selectedList={selectedList}
-        />
-        <TravelChecklist 
-          style={{flex: 1}}
-          selectedList={selectedList}
-          duplicateList={duplicateList}
-          duplicateTarget={duplicateTarget}
-        />
+    return (
+      <div>
+        <Router>
+          {/* default */}
+          <Routes>
+            <Route path='/' Component={Login} />
+            <Route path='/Main' Component={Main} />
+          </Routes>
+        </Router>
       </div>
-    </div>
-  );
-}
+    );
+};
 
 export default App;

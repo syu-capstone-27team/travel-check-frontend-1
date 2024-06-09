@@ -6,6 +6,7 @@ import { CgMore } from "react-icons/cg";
 import { FaCheckCircle  } from "react-icons/fa";
 import { FaBan  } from "react-icons/fa";
 import styles from './index.module.scss';
+import Popup from "reactjs-popup"
 
 
 
@@ -28,7 +29,7 @@ const ToggleSidebar = ({ onListSelect, onDuplicateList, onDuplicateTarget, selec
 
     // Function to handle adding a new list
     const addList = () => {
-        setListMenu([...listMenu, { id: Date.now(), name: 'New List', items: [] }]);
+        setListMenu([...listMenu, { id: Date.now(), name: 'New List', items: [], saved: false }]);
     };
 
     const deleteList = (listId) => {
@@ -86,6 +87,11 @@ const ToggleSidebar = ({ onListSelect, onDuplicateList, onDuplicateTarget, selec
         };
     }, [dropdownVisible]);
 
+    // Save function - updates saved state of list
+    const saveChecklist = (listId) => {
+        setListMenu(listMenu.map(list => list.id === listId ? { ...list, saved: true } : list));
+    };
+
     return (
 
         <Sidebar className={styles.Sidebar} style={{ width: '429px', minWidth: '0px' }}>
@@ -107,23 +113,14 @@ const ToggleSidebar = ({ onListSelect, onDuplicateList, onDuplicateTarget, selec
                                     onChange={handleRenameInputChange}
                                     style={{ flex: '1', marginLeft: '10px' }}
                                 />
-                                <FaCheckCircle  
+                                <FaCheckCircle
+                                    className='checkCircle'
                                     size={24}
-                                    style={{ 
-                                        position: 'relative', 
-                                        objectFit: 'cover',
-                                        cursor: 'pointer'
-                                    }}
                                     onClick={() => saveListName(list.id)}
                                 />
                                 <FaBan 
+                                    className='cancelX'
                                     size={24}
-                                    style={{ 
-                                        position: 'relative', 
-                                        objectFit: 'cover',
-                                        marginRight: '10px',
-                                        cursor: 'pointer'
-                                    }}
                                     onClick={cancelRenaming} 
                                 />
                             </div>
@@ -137,7 +134,8 @@ const ToggleSidebar = ({ onListSelect, onDuplicateList, onDuplicateTarget, selec
                                         whiteSpace: 'nowrap',
                                         overflow: 'hidden', 
                                         textOverflow: 'ellipsis',
-                                        background: selectedList.id === list.id ? 'rgba(255, 201, 214, 0.298)' : 'none' // Change background color for active list
+                                        background: selectedList.id === list.id ? 'rgba(255, 201, 214, 0.298)' : 'none', // Change background color for active list
+                                        borderBottom: selectedList.id === list.id ? 'solid rgb(255, 0, 61)' : 'none'
                                     }}>
                                     {list.name}
                                 </MenuItem>
@@ -149,7 +147,17 @@ const ToggleSidebar = ({ onListSelect, onDuplicateList, onDuplicateTarget, selec
                                     }}
                                     ref={(el) => (dropdownRefs.current[list.id] = el)}
                                 />
-                            </div>
+                                <Popup
+                                    trigger={() => (
+                                        <button className="save" onClick={() => saveChecklist(list.id)}>
+                                            Save
+                                        </button>
+                                    )}
+                                    position="right center"
+                                    closeOnDocumentClick
+                                >
+                                    <span> Checklist Stored </span>
+                                </Popup>                            </div>
                         )}
                         {dropdownVisible === list.id && (
                             <div 

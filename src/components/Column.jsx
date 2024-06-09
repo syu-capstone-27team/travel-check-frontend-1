@@ -8,7 +8,7 @@ import { FaTimes, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import styles from './index.module.scss';
 
 
-const Column = ({ column, categoryList, checkList, selectedList, setListState, addCategory, addChecklistItem, removeCategory, removeChecklistItem, toggleChecklistItemChecked, handleInputChange }) => {
+const Column = ({ column, categoryList, checkList, selectedList, setListState, addChecklistItem, removeCategory, removeChecklistItem, toggleChecklistItemChecked, handleInputChange }) => {
     // dropdown visibility
     const [dropdownVisible, setDropdownVisible] = useState(null);
     // collapse state
@@ -47,52 +47,21 @@ const Column = ({ column, categoryList, checkList, selectedList, setListState, a
     return (
         <div key={column} className={styles.categoryColumn}>
             {categoryList.filter(category => category.column === column).map(category => (
-                <div key={category.id} style={{ marginBottom: '20px', position: 'relative' }}>
+                <div key={category.id} style={{ marginBottom: '20px', position: 'relative', width: '100%' }}>
                     <div className='category-container'>
-                        <input className='category-title'
-                            type="text"
-                            placeholder="Category title"
-                            value={category.text}
-                            onChange={(e) => {
-                                const newCategoryList = categoryList.map(cat =>
-                                    cat.id === category.id ? { ...cat, text: e.target.value } : cat
-                                );
-                                setListState(selectedList.id, {
-                                    categoryList: newCategoryList
-                                });
-                            }}
-                        />
+                        <div className='category-title'>{ category.name }</div>
                         <div className='category-options'>
                             <button className='toggle-button' onClick={() => toggleCollapse(category.id)}>
                                 {collapsedCategories[category.id] ? <FaChevronDown /> : <FaChevronUp />}
                             </button>
-                            <FaTimes 
-                                className={styles.checkIcon}
-                                style={{
-                                    marginLeft: '5px'
-                                }}
-                                onClick={(e) => {
-                                    e.stopPropagation(); // Prevent triggering the MenuItem click
-                                    removeCategory(category.id);
-                                }}
-                            />
                         </div>
-
-                        {dropdownVisible === category.id && (
-                            <div 
-                                className="dropdown-menu" 
-                                ref={(el) => (dropdownRefs.current[category.id] = el)}
-                            >
-                                <div className='dropdown-item' >Duplicate</div>
-                                <div className="dropdown-item" onClick={() => removeCategory(category.id)}>Delete</div>
-                            </div>
-                        )}
                     </div>
+                    <hr style={{ width: '100%' }}></hr>
                     {!collapsedCategories[category.id] && (
                         <>
                             {checkList.filter(item => item.categoryId === category.id).map(item => (
                                 <div key={item.id} className={styles.checkItemRow}>
-                                    <div onClick={() => toggleChecklistItemChecked(item.id)}>
+                                    <div onClick={() => toggleChecklistItemChecked(item.id)} style={{ marginLeft: '10px' }}>
                                         {item.checked ? <Checkbox /> : <UnCheckbox />}
                                     </div>
 
@@ -103,7 +72,7 @@ const Column = ({ column, categoryList, checkList, selectedList, setListState, a
                                         value={item.text}
                                         onChange={(e) => handleInputChange(item.id, e)}
                                         rows={1}
-                                        style={{ flex: 1, marginRight: '10px', border: 'none', }}
+                                        style={{ flex: 1, marginRight: '10px', border: 'none' }}
                                     />
                                     <FaTimes 
                                         className={styles.checkIcon}
