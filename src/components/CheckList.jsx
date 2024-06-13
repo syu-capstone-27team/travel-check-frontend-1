@@ -10,15 +10,15 @@ const TravelChecklist = ({ selectedList, duplicateList, duplicateTarget }) => {
     // Category template
     // name만 변경하면 됩니다
     const categoryList = [
-        { id: 0, name: '0', column: 0 },
-        { id: 1, name: '1', column: 1 },
-        { id: 2, name: '2', column: 2 },
-        { id: 3, name: '3', column: 0 },
-        { id: 4, name: '4', column: 1 },
-        { id: 5, name: '5', column: 2 },
-        { id: 6, name: '6', column: 0 },
-        { id: 7, name: '7', column: 1 },
-        { id: 8, name: '8', column: 2 },
+        { id: 0, name: '필수 리스트', column: 0 },
+        { id: 1, name: '의류', column: 1 },
+        { id: 2, name: '전자기기', column: 2 },
+        { id: 3, name: '상비약', column: 0 },
+        { id: 4, name: '세면도구', column: 1 },
+        { id: 5, name: '기타', column: 2 },
+        // { id: 6, name: '6', column: 0 },
+        // { id: 7, name: '7', column: 1 },
+        // { id: 8, name: '8', column: 2 },
     ]
 
 

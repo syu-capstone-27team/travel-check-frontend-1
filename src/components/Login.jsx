@@ -24,6 +24,7 @@ const Login = ({ onLogin }) => {
 
     const loginTest = () => {
         // TODO: replace with kakao login
+        // window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_CLIENT_ID}&redirect_uri=http://61.109.236.108:8080/login/oauth2/code/kakao&response_type=code`;
         navigate('/Main', { relative: 'path' });
     };
 
